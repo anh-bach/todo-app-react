@@ -28,7 +28,13 @@ jobs:
       run: 
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build The Docker Image
-      run: docker build https://github.com/iamanh1990/todo-app-react
+      run: docker build -t todo-app .
+
+    - name: Run image
+      run: docker run -it --name todo-app todo-app
+      
+    - name: Tag image
+      run:  docker tag todo-app:latest iamanh/todo-app:latest               
       
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USER}}/todo-app
+      run: docker push ${{secrets.DOCKER_USER}}/todo-app:latest
