@@ -28,7 +28,7 @@ jobs:
       run: 
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build The Docker Image
-      run: docker build -t todo-app      
+      run: docker build . --file Dockerfile --tag iamanh/todo-app:test
       
     - name: Docker Push
       run: docker push ${{secrets.DOCKER_USER}}/todo-app
